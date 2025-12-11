@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
+
+const genreSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 50
+    }
+});
+
 const genres = [
     {id: 1, name: 'Action'},
     {id: 2, name: 'Horror'},
