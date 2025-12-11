@@ -12,6 +12,7 @@ const genreSchema = new mongoose.Schema({
     }
 });
 
+const Genre = new mongoose.model('Genre', genreSchema);
 const genres = [
     {id: 1, name: 'Action'},
     {id: 2, name: 'Horror'},
