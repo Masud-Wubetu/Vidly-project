@@ -1,3 +1,4 @@
+const auth = require('../middleWare/auth');
 const { Rental, validate } = require('../models/rental');
 const { Movie } = require('../models/movie');
 const { Customer } = require('../models/customer');
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
     res.send(rentals);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   // Validate customer
   const customer = await Customer.findById(req.body.customerId);
   if (!customer) return res.status(400).send('Invalid customer.');
