@@ -4,11 +4,11 @@ require('winston-mongodb');
 const config = require('config');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
-const mongoose = require('mongoose');
-
 const express = require('express');
 const app = express();
-require('./startup/routes') (app)
+
+require('./startup/routes')(app);
+require('./startup/db')();
 
 winston.exceptions.handle(
     new winston.transports.File({ filename: 'uncaughtExceptions.log'})
@@ -32,9 +32,7 @@ if(!config.get('jwtPrivateKey')) {
     process.exit(1);
 }
 
-mongoose.connect('mongodb://localhost/vidly')
-    .then(() => console.log('connected to mongoDB...'))
-    .catch(err => console.error('Could not connect to mongoDB...'))
+
 
 
 const port = process.env.PORT || 3000
